@@ -1,6 +1,6 @@
+#include "lexer.hpp"
 
-using namespace std;
-
-class Lexer {
-
-};
+void Lexer::build_module()
+{
+    // TODO
+}

@@ -42,7 +42,7 @@ class Tokenizer {
 private:
     istream* _stream;
     vector<char> _buffer;
-    size_t _cursor = 0;
+    ssize_t _cursor = 0;
     streamsize _size = 0;
     Cursor position = Cursor(1, 1);
 
