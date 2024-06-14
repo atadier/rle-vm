@@ -29,16 +29,17 @@ void dump_tokenizer(Tokenizer tokens) {
     }
 }
 
-void run(string input_filename) {
+int run(string input_filename) {
     ifstream in(input_filename);
 
     if (errno) {
         cerr << "could not open file '" << input_filename << "': " << strerror(errno);
-        return;
+        return 1;
     }
 
     Tokenizer tokenizer(&in);
     dump_tokenizer(tokenizer);
+    return 0;
 }
 
 int show_help(string program_name) {
@@ -62,5 +63,5 @@ int main(int argc, char** argv) {
         return 1;
     }
 
-    run(filename);
+    return run(filename);
 }
