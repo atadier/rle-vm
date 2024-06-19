@@ -44,6 +44,14 @@ bool Tokenizer::is_hash() {
     return condition_check([](char c) { return c == '#'; });
 }
 
+bool Tokenizer::is_colon() {
+    return condition_check([](char c) { return c == ':'; });
+}
+
+bool Tokenizer::is_comma() {
+    return condition_check([](char c) { return c == ','; });
+}
+
 bool Tokenizer::is_eof() {
     return _cursor >= _size;
 }
@@ -69,6 +77,10 @@ Token* Tokenizer::next() {
             type = TokenType::NEWLINE;
         } else if (is_hash()) {
             type = TokenType::HASH;
+        } else if (is_colon()) {
+            type = TokenType::COLON;
+        } else if (is_comma()) {
+            type = TokenType::COMMA;
         }
 
         cursor_next();

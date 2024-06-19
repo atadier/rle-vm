@@ -8,7 +8,12 @@ add_library(front
     src/front/token.cpp
     src/front/lexer.cpp
 )
+add_library(vm
+    src/vm/module.cpp
+    src/vm/instruction.hpp
+)
 target_include_directories(front PUBLIC src/front)
+target_include_directories(vm PUBLIC src/vm)
 
 # enable all warnings
 if(MSVC)

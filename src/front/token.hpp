@@ -11,6 +11,8 @@ enum TokenType {
     NUMERIC,
     NEWLINE,
     HASH,
+    COMMA,
+    COLON,
     UNKNOWN,
 };
 
@@ -56,6 +58,8 @@ private:
     bool is_newline();
     bool is_alphanumeric();
     bool is_hash();
+    bool is_colon();
+    bool is_comma();
     bool is_eof();
 
 public:

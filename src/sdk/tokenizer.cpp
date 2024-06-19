@@ -19,6 +19,8 @@ void dump_tokenizer(Tokenizer tokens) {
         {TokenType::NUMERIC, "Numeric"},
         {TokenType::NEWLINE, "Newline"},
         {TokenType::HASH, "Hash"},
+        {TokenType::COMMA, "Comma"},
+        {TokenType::COLON, "Colon"},
         {TokenType::UNKNOWN, "Unknown"}
     };
 
