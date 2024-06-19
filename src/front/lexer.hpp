@@ -1,12 +1,18 @@
 #pragma once
 #include "token.hpp"
+#include "module.hpp"
+
+using namespace std;
 
 class Lexer {
 private:
     Tokenizer _tokens;
 
-public:
-    Lexer(Tokenizer tokens) : _tokens(tokens) {};
+    Instruction* parse_toplevel(const string* label = nullptr);
+    Instruction* parse_arguments(const string& mnemonic);
 
-    void build_module();
+public:
+    Lexer(const Tokenizer& tokens) : _tokens(tokens) {};
+
+    Module* build_module();
 };

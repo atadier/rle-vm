@@ -15,6 +15,8 @@ add_library(vm
 target_include_directories(front PUBLIC src/front)
 target_include_directories(vm PUBLIC src/vm)
 
+target_link_libraries(front PRIVATE vm)
+
 # enable all warnings
 if(MSVC)
   target_compile_options(front PRIVATE /W4)
@@ -28,7 +30,7 @@ add_executable(assembler src/sdk/assembler.cpp)
 target_link_libraries(tokenizer PRIVATE front)
 target_include_directories(tokenizer PRIVATE vendor/)
 
-target_link_libraries(assembler PRIVATE front)
+target_link_libraries(assembler PRIVATE front vm)
 target_include_directories(assembler PRIVATE vendor/)
 
 install(TARGETS tokenizer assembler RUNTIME DESTINATION bin)
