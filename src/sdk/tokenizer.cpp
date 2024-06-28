@@ -15,13 +15,13 @@ string display_token(string value) {
 
 void dump_tokenizer(Tokenizer tokens) {
     map<TokenType, std::string> tokenNames = {
-        {TokenType::IDENTIFIER, "Identifier"},
-        {TokenType::NUMERIC, "Numeric"},
-        {TokenType::NEWLINE, "Newline"},
-        {TokenType::HASH, "Hash"},
-        {TokenType::COMMA, "Comma"},
-        {TokenType::COLON, "Colon"},
-        {TokenType::UNKNOWN, "Unknown"}
+        {TokenType::Identifier, "Identifier"},
+        {TokenType::Numeric, "Numeric"},
+        {TokenType::Newline, "Newline"},
+        {TokenType::Hash, "Hash"},
+        {TokenType::Comma, "Comma"},
+        {TokenType::Colon, "Colon"},
+        {TokenType::Unknown, "Unknown"}
     };
 
     cout << "\033[90m[line: col] Token\033[0m" << endl;

@@ -7,13 +7,13 @@
 using namespace std;
 
 enum TokenType {
-    IDENTIFIER,
-    NUMERIC,
-    NEWLINE,
-    HASH,
-    COMMA,
-    COLON,
-    UNKNOWN,
+    Identifier,
+    Numeric,
+    Newline,
+    Hash,
+    Comma,
+    Colon,
+    Unknown,
 };
 
 struct Cursor {
@@ -60,7 +60,7 @@ private:
     bool is_hash();
     bool is_colon();
     bool is_comma();
-    bool is_eof();
+    bool is_eof() const;
 
 public:
     Tokenizer(istream* stream) : _stream(stream), _buffer(BUFFER_SIZE) { fill_buffer(); }

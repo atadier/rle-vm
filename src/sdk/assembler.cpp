@@ -15,7 +15,15 @@ void display_module(const Module& mod) {
     cout << "Module" << endl;
     cout << "instructions:" << endl;
     for (const Instruction& instruction : mod._instructions) {
-        cout << "\t" << instruction.mnemonic << endl;
+        cout << "\t" << instruction.definition.mnemonic;
+
+        if (instruction.arg1.type != None)
+            cout << " " << instruction.arg1.display_value();
+        if (instruction.arg2.type != None)
+            cout << ", " << instruction.arg2.display_value();
+        if (instruction.arg3.type != None)
+            cout << ", " << instruction.arg3.display_value();
+        cout << endl;
     }
 }
 

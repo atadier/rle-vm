@@ -37,7 +37,7 @@ bool Tokenizer::is_newline() {
 }
 
 bool Tokenizer::is_alphanumeric() {
-    return condition_check([](char c) { return (bool)isalnum(c); });
+    return condition_check([](char c) { return (bool)isalnum(c) || c == '_' || c == '-'; });
 }
 
 bool Tokenizer::is_hash() {
@@ -52,7 +52,7 @@ bool Tokenizer::is_comma() {
     return condition_check([](char c) { return c == ','; });
 }
 
-bool Tokenizer::is_eof() {
+bool Tokenizer::is_eof() const {
     return _cursor >= _size;
 }
 
@@ -62,25 +62,25 @@ Token* Tokenizer::next() {
     while (is_whitespace() && cursor_next()) {};
 
     bool numeric = true;
-    Cursor start = position;
+    const Cursor start = position;
     while (is_alphanumeric()) {
         token.push_back(_buffer[_cursor]);
-        numeric &= isdigit(_buffer[_cursor]);
+        numeric &= isdigit(_buffer[_cursor]) || (_buffer[_cursor] == '-' && token.length() < 2);
         cursor_next();
     }
 
     if (token.empty() && !is_eof()) {
         token.push_back(_buffer[_cursor]);
-        TokenType type = TokenType::UNKNOWN;
+        TokenType type = TokenType::Unknown;
 
         if (is_newline()) {
-            type = TokenType::NEWLINE;
+            type = TokenType::Newline;
         } else if (is_hash()) {
-            type = TokenType::HASH;
+            type = TokenType::Hash;
         } else if (is_colon()) {
-            type = TokenType::COLON;
+            type = TokenType::Colon;
         } else if (is_comma()) {
-            type = TokenType::COMMA;
+            type = TokenType::Comma;
         }
 
         cursor_next();
@@ -89,5 +89,5 @@ Token* Tokenizer::next() {
     }
 
     if (is_eof()) return NULL;
-    return new Token(token, numeric ? TokenType::NUMERIC : TokenType::IDENTIFIER, Span(start, position));
+    return new Token(token, numeric ? TokenType::Numeric : TokenType::Identifier, Span(start, position));
 }
