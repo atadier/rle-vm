@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.12)
+cmake_minimum_required(VERSION 3.20)
 
 project(rle-vm LANGUAGES CXX)
 set(CMAKE_CXX_STANDARD 20)
@@ -29,6 +29,9 @@ endif()
 
 add_executable(tokenizer src/sdk/tokenizer.cpp)
 add_executable(assembler src/sdk/assembler.cpp)
+
+# Qt GUI targets
+add_subdirectory(src/dbg)
 
 target_link_libraries(tokenizer PRIVATE front)
 target_include_directories(tokenizer PRIVATE vendor/)
