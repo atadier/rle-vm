@@ -6,7 +6,7 @@
 #include "argument.hpp"
 
 using namespace std;
-
+class Vm;
 
 struct InstructionDefinition
 {
@@ -43,6 +43,6 @@ public:
     Argument arg1;
     Argument arg2;
     Argument arg3;
-    virtual void execute() { throw runtime_error("instruction not implemented!"); }
+    virtual void execute(Vm* machine) { throw runtime_error("instruction not implemented!"); }
     virtual ~Instruction() = default;
 };

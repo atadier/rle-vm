@@ -25,9 +25,9 @@ void unknown_mnemonic(const string& mnemonic, const size_t lineno) {
 
 Module* Lexer::build_module()
 {
-    vector<Instruction> instructions;
-    while (const Instruction* instr = parse_toplevel()) {
-        instructions.push_back(*instr);
+    vector<Instruction*> instructions;
+    while (Instruction* instr = parse_toplevel()) {
+        instructions.push_back(instr);
     }
     return new Module(instructions);
 }

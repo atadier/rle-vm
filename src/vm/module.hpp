@@ -7,7 +7,7 @@
 using namespace std;
 
 struct Module {
-    vector<Instruction> _instructions;
+    vector<Instruction*> _instructions;
 
-    explicit Module(vector<Instruction> instructions): _instructions(move(instructions)) {}
+    explicit Module(vector<Instruction*> instructions): _instructions(move(instructions)) {}
 };

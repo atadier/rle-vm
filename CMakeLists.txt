@@ -9,11 +9,8 @@ add_library(front
     src/front/lexer.cpp
 )
 add_library(vm
-    src/vm/module.cpp
     src/vm/vm.cpp
-    src/vm/instruction.cpp
     src/vm/definitions.cpp
-    src/vm/insts/add.cpp
 )
 target_include_directories(front PUBLIC src/front)
 target_include_directories(vm PUBLIC src/vm)

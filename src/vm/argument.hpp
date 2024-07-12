@@ -57,4 +57,9 @@ struct Argument {
                 return "[INVALID]";
         }
     }
+
+    int get_numeric() const {
+        if (type != Number) throw runtime_error("type error, expected Number but got " + type);
+        return _numericValue;
+    }
 };
