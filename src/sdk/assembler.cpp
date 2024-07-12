@@ -14,15 +14,15 @@ using namespace std;
 void display_module(const Module& mod) {
     cout << "Module" << endl;
     cout << "instructions:" << endl;
-    for (const Instruction& instruction : mod._instructions) {
-        cout << "\t" << instruction.definition.mnemonic;
+    for (const Instruction* instruction : mod.instructions) {
+        cout << "\t\033[33m" << instruction->definition.mnemonic << "\033[0m";
 
-        if (instruction.arg1.type != None)
-            cout << " " << instruction.arg1.display_value();
-        if (instruction.arg2.type != None)
-            cout << ", " << instruction.arg2.display_value();
-        if (instruction.arg3.type != None)
-            cout << ", " << instruction.arg3.display_value();
+        if (instruction->arg1.type != None)
+            cout << " \033[36m" << instruction->arg1.display_value() << "\033[0m";
+        if (instruction->arg2.type != None)
+            cout << ", \033[36m" << instruction->arg2.display_value() << "\033[0m";
+        if (instruction->arg3.type != None)
+            cout << ", \033[36m" << instruction->arg3.display_value() << "\033[0m";
         cout << endl;
     }
 }

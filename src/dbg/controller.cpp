@@ -115,7 +115,17 @@ void VmController::step() {
 void VmController::run() {
     if (!_machine) return;
     try {
-        _machine->run();
+        _machine->run(VM_RUN_MAX_STEPS);
+
+        if ((_machine->flags & 0x1) == 0) {
+            error_messagebox(
+                QString("Machine Timed Out"),
+                QString("The virtual machine timed out after %1 instructions.").arg(VM_RUN_MAX_STEPS)
+                );
+            reload();
+            return;
+        }
+
         update_state();
     } catch (runtime_error &err) {
         error_messagebox(QString("Runtime Exception"), err.what());

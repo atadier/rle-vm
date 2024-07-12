@@ -1,18 +1,19 @@
 #include "vm.hpp"
 
-void Vm::run() {
+void Vm::run(int fuel) {
     flags &= 0xFFFE;
-    while (!(flags & 0x1)) {
+    while (!(flags & 0x1) && fuel != 0) {
         step();
+        fuel--;
     }
 }
 
 void Vm::step() {
-    if (pc >= module->_instructions.size()) {
+    if (pc >= module->instructions.size()) {
         throw runtime_error("trap: program counter is out of bounds");
     }
 
-    Instruction* instruction = module->_instructions[pc];
+    Instruction* instruction = module->instructions[pc];
     instruction->execute(this);
 }
 
@@ -27,4 +28,8 @@ int Vm::pop() {
     const int value = stack[sp];
     sp--;
     return value;
+}
+
+const int Vm::peek() {
+    return stack[sp];
 }

@@ -20,9 +20,10 @@ public:
 
     explicit Vm(Module* module) : module(module) {};
 
-    void run();
+    void run(int fuel = -1);
     void step();
 
     void push(int value);
     int pop();
+    const int peek();
 };
