@@ -56,6 +56,8 @@ ApplicationWindow {
                 ProgramViewer {
                     id: editor
                     content: machine.programSource
+                    Layout.fillWidth: true
+                    Layout.fillHeight: true
                 }
             }
         }

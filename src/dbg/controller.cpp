@@ -29,6 +29,7 @@ void VmController::update_state() {
     if (_machine) {
         setPc(_machine->pc);
         setSp(_machine->sp);
+        setFlags(_machine->flags);
     }
 }
 
@@ -73,6 +74,18 @@ void VmController::setSp(size_t sp) {
     }
 }
 
+unsigned int VmController::getFlags() {
+    return _flags;
+}
+
+void VmController::setFlags(unsigned int flags) {
+    if (flags != _flags) {
+        _flags = flags;
+        emit flagsChanged(flags);
+    }
+}
+
+
 void VmController::step() {
     if (!_machine) return;
     _machine->step();
@@ -95,13 +108,13 @@ void VmController::loadModuleSource(const QString& source) {
     }
 
     auto machine = new Vm(module);
-    _machine = machine;
+    setVirtualMachine(machine);
     setSource(source);
-    update_state();
 }
 
 void VmController::reload() {
     _machine->pc = 0;
     _machine->sp = 0;
+    _machine->flags = 0;
     update_state();
 }

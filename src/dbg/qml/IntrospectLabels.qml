@@ -27,4 +27,15 @@ RowLayout {
             font: fixedFont
         }
     }
+
+    GridLayout {
+        Label {
+            text: "Flags: "
+            font.bold: true
+        }
+        Label {
+            text: machine.flags
+            font: fixedFont
+        }
+    }
 }

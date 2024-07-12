@@ -3,6 +3,7 @@
 #include "insts/loadc.hpp"
 #include "insts/leq.hpp"
 #include "insts/mul.hpp"
+#include "insts/neg.hpp"
 
 Instruction* init_instruction_am(const string& mnemonic, Argument arguments[3]) {
     if (mnemonic == "halt") return new HaltInstruction(arguments);
@@ -13,6 +14,7 @@ Instruction* init_instruction_am(const string& mnemonic, Argument arguments[3]) 
 }
 
 Instruction* init_instruction_nz(const string& mnemonic, Argument arguments[3]) {
+    if (mnemonic == "neg") return new NegInstruction(arguments);
     return nullptr;
 }
 
@@ -30,6 +32,7 @@ InstructionDefinition get_definition_am(const string& mnemonic) {
 }
 
 InstructionDefinition get_definition_nz(const string& mnemonic) {
+    if (mnemonic == "neg") return NegInstruction::definition;
     return InstructionDefinition("");
 }
 
