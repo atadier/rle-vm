@@ -1,6 +1,5 @@
 #pragma once
 #include "../instruction.hpp"
-#include "../vm.hpp"
 
 class HaltInstruction: public Instruction
 {

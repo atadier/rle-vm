@@ -16,6 +16,7 @@ qt_add_resources(rle-debug "qml" FILES
     qml/main.qml
     qml/ProgramViewer.qml
     qml/IntrospectLabels.qml
+    qml/MachineStack.qml
 )
 
 target_sources(rle-debug PRIVATE controller.cpp)

@@ -30,6 +30,11 @@ void VmController::update_state() {
         setPc(_machine->pc);
         setSp(_machine->sp);
         setFlags(_machine->flags);
+
+        QList<int> stack;
+        stack.reserve(VM_STACK_SIZE);
+        std::copy(_machine->stack, _machine->stack + VM_STACK_SIZE, std::back_inserter(stack));
+        setStack(stack);
     }
 }
 
@@ -85,17 +90,37 @@ void VmController::setFlags(unsigned int flags) {
     }
 }
 
+QList<int> VmController::getStack() {
+    return _stack;
+}
+
+void VmController::setStack(QList<int> stack) {
+    if (stack != _stack) {
+        _stack = stack;
+        emit stackChanged(stack);
+    }
+}
 
 void VmController::step() {
     if (!_machine) return;
-    _machine->step();
-    update_state();
+    try {
+        _machine->step();
+        update_state();
+    } catch (runtime_error &err) {
+        error_messagebox(QString("Runtime Exception"), err.what());
+        reload();
+    }
 }
 
 void VmController::run() {
     if (!_machine) return;
-    _machine->run();
-    update_state();
+    try {
+        _machine->run();
+        update_state();
+    } catch (runtime_error &err) {
+        error_messagebox(QString("Runtime Exception"), err.what());
+        reload();
+    }
 }
 
 void VmController::loadModuleSource(const QString& source) {
@@ -116,5 +141,7 @@ void VmController::reload() {
     _machine->pc = 0;
     _machine->sp = 0;
     _machine->flags = 0;
+
+    std::fill_n(_machine->stack, VM_STACK_SIZE, 0);
     update_state();
 }

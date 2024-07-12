@@ -59,6 +59,12 @@ ApplicationWindow {
                     Layout.fillWidth: true
                     Layout.fillHeight: true
                 }
+
+                MachineStack {
+                    id: stackView
+                    stack: machine.stack
+                    sp: machine.sp
+                }
             }
         }
     }
