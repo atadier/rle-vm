@@ -9,7 +9,7 @@ class JumpzInstruction: public Instruction
     int address;
 
 public:
-    static constexpr auto definition = InstructionDefinition("jump", Number);
+    static constexpr auto definition = InstructionDefinition("jumpz", Number);
     explicit JumpzInstruction(Argument arguments[3]): Instruction(definition, arguments) {
         address = arguments[0].get_numeric();
     }
@@ -21,7 +21,7 @@ public:
         }
 
         if (address < 0 || address >= machine->module->instructions.size())
-            throw runtime_error(std::format("trap: invalid jump address: ", address));
+            throw runtime_error(std::format("trap: invalid jump address: {}", address));
         machine->pc = address;
     };
 };
